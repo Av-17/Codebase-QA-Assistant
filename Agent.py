@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 from langchain.docstore.document import Document
 import os
 import streamlit as st
-os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
+if 'GOOGLE_API_KEY' in st.secrets:
+    os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
 # Load environment variables
 load_dotenv()
 
@@ -18,8 +19,8 @@ except Exception as e:
     raise RuntimeError(f"Failed to initialize LLM: {e}")
 
 # Token and repo config
-repo_owner_with_repo_name = "dexkor-tech/B2C-Backend"
-api_token = os.getenv("GITHUB_API_TOKEN")
+# repo_owner_with_repo_name = "dexkor-tech/B2C-Backend"
+# api_token = os.getenv("GITHUB_API_TOKEN")
 
 # State type definition
 class AgentState(TypedDict):
