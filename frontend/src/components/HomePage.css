@@ -1,0 +1,114 @@
+body{
+  background-color: #f0f0f0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  /* border: 1px solid #ddd; */
+  border-radius: 12px;
+  /* background-color: #fafafa; */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.user-info {
+  margin-bottom: 30px;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px 15px;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.fetch-btn {
+  background-color: #4CAF50;
+}
+
+.reset-btn {
+  background-color: #f44336;
+}
+
+.chat-box {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.chat-bubble {
+  padding: 8px 12px;
+  margin: 4px 0;
+  border-radius: 15px;
+  max-width: 75%;
+  word-wrap: break-word;     /* ✅ Break long words */
+  white-space: pre-wrap;     /* ✅ Preserve line breaks but allow wrapping */
+  overflow-wrap: anywhere; 
+}
+
+.user-bubble {
+  background: #d8dadb;
+  color: black;
+  margin-left: auto;
+  margin-bottom: 10px;
+}
+
+.ai-bubble {
+  background: #f1f1f1;
+  color: black;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
