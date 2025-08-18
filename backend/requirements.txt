@@ -1,0 +1,33 @@
+fastapi==0.110.2
+uvicorn==0.29.0
+requests==2.31.0
+python-dotenv==1.0.1
+streamlit-js-eval==0.1.7
+
+
+
+# Core dependencies
+langchain==0.3.26
+langchain-core==0.3.67
+langchain-community==0.3.27
+langchain-google-genai==2.1.6
+
+# LangGraph with SQLite checkpoint support
+langgraph==0.5.2
+langgraph-checkpoint==2.1.0
+langgraph-checkpoint-sqlite==2.0.10
+langgraph-prebuilt==0.5.2
+langgraph-sdk==0.1.72
+
+# Retrieval
+faiss-cpu==1.11.0
+
+# General
+google-api-core==2.25.1
+google-auth==2.40.3
+google-ai-generativelanguage==0.6.18
+python-dotenv==1.1.1
+pandas==2.3.0
+requests==2.32.4
+PyYAML==6.0.2
+typing_extensions==4.14.0
