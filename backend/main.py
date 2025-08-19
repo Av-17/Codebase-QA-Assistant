@@ -86,9 +86,9 @@ def callback(code: str):
     )
     return response
 
-@app.get("/.well-known/appspecific/com.chrome.devtools.json")
-def ignore_devtools():
-    return {}
+# @app.get("/.well-known/appspecific/com.chrome.devtools.json")
+# def ignore_devtools():
+#     return {}
 
 # to get all the repos of user
 
