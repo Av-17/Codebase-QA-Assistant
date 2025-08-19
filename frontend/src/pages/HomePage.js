@@ -30,7 +30,7 @@ function HomePage() {
   }, [location])
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/repos", {
+    fetch("https://codebase-qa-assistant.onrender.com/api/repos", {
       method: "GET",
       credentials: "include"
     })
@@ -66,7 +66,7 @@ function HomePage() {
     setIsFetchingRepo(true);
     try {
       const res = await fetch(
-        `http://localhost:8000/fetch_repo?repo_url=${encodeURIComponent(repoUrl)}`, {
+        `https://codebase-qa-assistant.onrender.com/fetch_repo?repo_url=${encodeURIComponent(repoUrl)}`, {
 
         method: "GET",
         credentials: "include"
@@ -92,7 +92,7 @@ function HomePage() {
     // console.log("Resetting repo...");
     setIsFetchingRepo(true);
     try {
-      const res = await fetch(`http://localhost:8000/reset_repo?repo_url=${encodeURIComponent(repoUrl)}`, {
+      const res = await fetch(`https://codebase-qa-assistant.onrender.com/reset_repo?repo_url=${encodeURIComponent(repoUrl)}`, {
         method: "POST",           // better to use POST for reset
         credentials: "include",   // send cookies/session
       });
@@ -123,7 +123,7 @@ function HomePage() {
     }
     setIsGettingAnswer(true);
     try {
-      const ans = await fetch(`http://localhost:8000/answer`, {
+      const ans = await fetch(`https://codebase-qa-assistant.onrender.com/answer`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({

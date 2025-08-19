@@ -2,7 +2,7 @@ import React from "react"
 
 function Loginpage(){
     const handleLogin =() => {
-        window.location.href = 'http://localhost:8000/login';
+        window.location.href = 'https://codebase-qa-assistant.onrender.com/login';
     };
     return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
