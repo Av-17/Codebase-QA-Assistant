@@ -74,7 +74,7 @@ def callback(code: str):
         # print(f"Failed to retrieve username: {user_data}") 
         username = "unknown"
     
-    response = RedirectResponse(url=f"http://localhost:3000/home?username={username}")
+    response = RedirectResponse(url=f"https://codebase-qa-assistant.vercel.app/home?username={username}")
     print(f"access token in callback {token}")
     # Set cookie for token - HTTPOnly and Secure recommended for security
     response.set_cookie(
