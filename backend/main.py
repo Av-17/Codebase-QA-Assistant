@@ -15,7 +15,7 @@ load_dotenv()
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://codebase-qa-assistant.vercel.app/"],
+    allow_origins=["https://codebase-qa-assistant.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["Authorization", "Content-Type"],
@@ -74,7 +74,7 @@ def callback(code: str):
         # print(f"Failed to retrieve username: {user_data}") 
         username = "unknown"
     
-    response = RedirectResponse(url=f"https://codebase-qa-assistant.vercel.app/home?username={username}")
+    response = RedirectResponse(url=f"https://codebase-qa-assistant.vercel.app")
     print(f"access token in callback {token}")
     # Set cookie for token - HTTPOnly and Secure recommended for security
     response.set_cookie(
