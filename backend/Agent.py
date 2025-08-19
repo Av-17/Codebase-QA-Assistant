@@ -63,10 +63,10 @@ def on_topic_router(state: AgentState):
             # print("Entering on_topic_router")
             on_topic = state.get("onChat", "").strip().lower()
             if on_topic == "yes":
-                print("Routing to answer node")
+                # print("Routing to answer node")
                 return "answer_node"
             else:
-                print("Routing to retrieve node")
+                # print("Routing to retrieve node")
                 return "retriever_node"
 
     
@@ -115,9 +115,9 @@ def retriever_node(state: AgentState) -> AgentState:
 
         available_files = [doc.metadata.get("source", "") for doc in retrieved_docs]
         file_type = classify_query_with_llm(ques, available_files)
-        print(file_type)
+        # print(file_type)
         if file_type in ["directory", "dir", "folder", "directory_structure"]:
-            print("enter in DIR")
+            # print("enter in DIR")
             router_prompt = ChatPromptTemplate.from_template("""
             You are a classifier for user queries about project directories.
 
@@ -160,7 +160,7 @@ def retriever_node(state: AgentState) -> AgentState:
 def answer_node(state: AgentState) -> AgentState:
     try:
         if state["onChat"].lower().strip() == "yes":
-            print(state["onChat"])
+            # print(state["onChat"])
             ques = state["question"]
             conversation = state["messages"]
             prompt = f'''You Github Codebase AI, where user can do QA to there Github repo.
@@ -172,7 +172,7 @@ def answer_node(state: AgentState) -> AgentState:
             stream = llm.invoke([HumanMessage(content=prompt)])
             return {**state, "messages": stream.content.strip()}
         else:
-            print(state["onChat"])
+            # print(state["onChat"])
 
             ques = state["question"]
             docs = state.get("retriever_doc",[]) or []
@@ -200,11 +200,6 @@ def answer_node(state: AgentState) -> AgentState:
     3. Show only the minimal code needed for the explanation (no unrelated lines).
     4. Explanations must be short, precise, and tied to the shown code.
     5. Keep the output format exactly as follows:
-    📄 Relevant Code:
-    <minimal snippet>
-
-    📝 Explanation:
-    <precise explanation>
     """
             stream = llm.invoke([HumanMessage(content=prompt)])
             return {**state, "messages": stream.content.strip()}

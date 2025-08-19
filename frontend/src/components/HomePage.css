@@ -71,6 +71,7 @@ body{
   border-radius: 8px;
   max-height: 300px;
   overflow-y: auto;
+  
 }
 
 .chat-bubble {
@@ -91,10 +92,12 @@ body{
 }
 
 .ai-bubble {
-  background: #f1f1f1;
-  color: black;
-  margin-right: auto;
-  margin-bottom: 10px;
+  max-width: 75%;
+  word-wrap: break-word;     /* Break long words */
+  white-space: pre-wrap;     /* Preserve line breaks but allow wrapping */
+  overflow-wrap: break-word; /* Use break-word instead of anywhere for better support */
+  box-sizing: border-box;    /* Ensure padding doesn't break max-width */
+  display: inline-block;  
 }
 
 .spinner {
@@ -112,3 +115,44 @@ body{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* Base style */
+.repo-select {
+  width: 100%;        /* take full width of parent container */
+  max-width: 500px;   /* prevent it from becoming too wide */
+  height: 45px;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  /* overflow-y: auto;     make scrollable */
+
+}
+
+/* Dropdown items */
+.repo-select option {
+  padding: 8px;
+  max-height: 150px; /* Adjust height to show ~5 options */
+  overflow-y: auto;
+
+}
+
+/* Small screens (tablets, mobiles) */
+@media (max-width: 768px) {
+  .repo-select {
+    font-size: 14px;
+    height: 40px;
+    max-width: 100%;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .repo-select {
+    font-size: 13px;
+    height: 38px;
+    padding: 4px 8px;
+  }
+}
+

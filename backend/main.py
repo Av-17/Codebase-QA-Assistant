@@ -59,7 +59,7 @@ def callback(code: str):
     token = token_data.get("access_token")
 
     if not token:
-        print(f"Failed to retrieve access token: {token_data}")
+        # print(f"Failed to retrieve access token: {token_data}")
         return JSONResponse({"error": "Failed to retrieve access token", "details": token_data.get("error_description", token_data.get("error"))}, status_code=400)
 
     
@@ -71,7 +71,7 @@ def callback(code: str):
     username = user_data.get("login", "unknown")
 
     if not username:
-        print(f"Failed to retrieve username: {user_data}") 
+        # print(f"Failed to retrieve username: {user_data}") 
         username = "unknown"
     
     response = RedirectResponse(url=f"http://localhost:3000/home?username={username}")
@@ -85,6 +85,32 @@ def callback(code: str):
         samesite="lax"
     )
     return response
+
+@app.get("/.well-known/appspecific/com.chrome.devtools.json")
+def ignore_devtools():
+    return {}
+
+# to get all the repos of user
+
+@app.get("/api/repos")
+def get_repos(access_token: str = Cookie(None)):
+    if not access_token:
+        return {"error": "Not logged in"}
+
+    # Call GitHub API to fetch repos
+    repo_res = requests.get(
+        "https://api.github.com/user/repos",
+        headers={"Authorization": f"token {access_token}"}
+    )
+
+    if repo_res.status_code != 200:
+        return {"error": "Failed to fetch repos", "details": repo_res.json()}
+
+    repos = repo_res.json()
+    repo_names = [repo["name"] for repo in repos]  # extract only repo names
+
+    return {"repositories": repo_names}
+
 
 repo_chunks_store = {}
 @app.get("/fetch_repo")
