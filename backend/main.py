@@ -74,8 +74,8 @@ def callback(code: str):
         # print(f"Failed to retrieve username: {user_data}") 
         username = "unknown"
     
-    response = RedirectResponse(url=f"https://codebase-qa-assistant.vercel.app/home?username={username}")
-    print(f"access token in callback {token}")
+    response = RedirectResponse(url=f"https://codebase-qa-assistant.onrender.com/home?username={username}")
+    # print(f"access token in callback {token}")
     # Set cookie for token - HTTPOnly and Secure recommended for security
     response.set_cookie(
         key="access_token",
@@ -95,7 +95,7 @@ def ignore_devtools():
 
 @app.get("/api/repos")
 def get_repos(access_token: str = Cookie(None)):
-    print(f"api access token : {access_token}")
+    # print(f"api access token : {access_token}")
     if not access_token:
         return {"error": "Not logged in"}
 
