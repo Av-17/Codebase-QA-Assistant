@@ -183,7 +183,7 @@ function HomePage() {
         >
           <option value="">-- Choose a repo --</option>
           {repos.map((repo) => (
-            <option key={repo} value={`https://github.com/${username}/${repo}`}>
+            <option key={repo} value={`http://github.com/${username}/${repo}`}>
               {repo}
             </option>
           ))}
