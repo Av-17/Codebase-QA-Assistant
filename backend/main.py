@@ -80,10 +80,10 @@ def callback(code: str):
     response.set_cookie(
         key="access_token",
         value=token,
-        httponly=True,  # Not accessible by JS
-        secure=False,   # Set to True if using HTTPS in production
-        max_age=3600*24*7,  # 7 days expiry
-        samesite="lax"
+        httponly=True,
+        secure=True,     # Must be True for HTTPS in production
+        samesite="None",
+        max_age=3600*24*7  # 7 days expiry
     )
     return response
 
