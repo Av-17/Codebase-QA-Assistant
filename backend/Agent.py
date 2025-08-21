@@ -38,6 +38,51 @@ class AgentState(TypedDict):
 
 checkpointer = MemorySaver()
 
+
+def query_rewriter(state : AgentState):
+    
+    user_question = state["question"]
+    if not user_question:
+        return state
+        
+    past_messages = state.get("messages",[])[-2:]
+    formatted_conversation = ""
+    for msg in past_messages:
+            role = msg.__class__.__name__.replace("Message","")
+            formatted_conversation += f"{role}: {msg.content}\n"
+        # print(f"role in intend : {role}")
+        # print(f"content in intend : {msg.content}")
+
+    if not formatted_conversation:
+            formatted_conversation = HumanMessage(content=f"user_input : {user_question}")
+    question_rewriter_prompt = SystemMessage(content=f"""
+    You are a Question Rewriter for a codebase Q&A system. 
+
+    Task:
+    - Take the user's current question and the past conversation.
+    - Detect any implicit references like 'this file', 'that folder', 'above code', 'below function'.
+    - Use the past conversation context to resolve these references.
+    - Rewrite the question as a standalone, explicit question that clearly expresses the user's intent.
+    - Preserve the original meaning of the question.
+    - Only output the rewritten question. Do not add explanations.
+
+    Past conversation:
+    {formatted_conversation}
+
+    User's current question:
+    {user_question}
+
+    Output:
+    """)
+    messages = [question_rewriter_prompt, HumanMessage(content=user_question)]
+    result = llm.invoke(messages)
+
+        # Update state
+    state["question"] = result.content.strip()
+    # print(state["question"])
+
+    return state
+    
 class GradeQuestion(BaseModel):
     score: Literal["yes", "no"] = Field(
         description="yes if general/non-repo, no if repo-related"
@@ -52,10 +97,9 @@ def intend_classifier(state: AgentState):
     formatted_conversation = ""
     for msg in past_messages:
         role = msg.__class__.__name__.replace("Message","")
+        formatted_conversation += f"{role}: {msg.content}\n"
         # print(f"role in intend : {role}")
         # print(f"content in intend : {msg.content}")
-
-        formatted_conversation += f"{role}: {msg.content}\n"
     if not formatted_conversation:
         formatted_conversation = HumanMessage(content=f"user_input : {user_input}")
         
@@ -265,6 +309,7 @@ def answer_node(state: AgentState) -> AgentState:
 # LangGraph Setup
 graph = StateGraph(AgentState)
 graph.add_node("retriever_node", retriever_node)
+graph.add_node("query_rewriter",query_rewriter)
 graph.add_node("answer_node", answer_node)
 graph.add_node("intend_classifier",intend_classifier)
 graph.add_conditional_edges(
@@ -274,9 +319,10 @@ graph.add_conditional_edges(
           "answer_node" : "answer_node"
      }
 )
+graph.add_edge("query_rewriter","intend_classifier")
 graph.add_edge("retriever_node", "answer_node")
 graph.add_edge("answer_node", END)
-graph.set_entry_point("intend_classifier")
+graph.set_entry_point("query_rewriter")
 
 try:
     agent = graph.compile(checkpointer=checkpointer)
