@@ -15,12 +15,12 @@ import asyncio
 import os
 # Load environment variables
 load_dotenv()
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-from load import fetch_github, chunk_splitter
-from vectoreDB import my_retriever
-# print(GITHUB_TOKEN)
-data = asyncio.run(fetch_github(repo_url="https://github.com/Av-17/AI-Driven-Stock-Predictor",token=GITHUB_TOKEN))
-chunks = chunk_splitter(data)
+# GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+# from load import fetch_github, chunk_splitter
+# from vectoreDB import my_retriever
+# # print(GITHUB_TOKEN)
+# data = asyncio.run(fetch_github(repo_url="https://github.com/Av-17/AI-Driven-Stock-Predictor",token=GITHUB_TOKEN))
+# chunks = chunk_splitter(data)
 
 # LLM initialization
 try:
@@ -326,13 +326,13 @@ graph.set_entry_point("query_rewriter")
 
 try:
     agent = graph.compile(checkpointer=checkpointer)
-    while True:
-        user = input("user : ").lower()
-        if user in ["end","exit","stop"]:
-             break
-        else:
-            response = agent.invoke({"question" : user,"chunks":chunks},config={"configurable": {"thread_id": 3}})
-            print(response["messages"][-1].content)
+    # while True:
+    #     user = input("user : ").lower()
+    #     if user in ["end","exit","stop"]:
+    #          break
+    #     else:
+    #         response = agent.invoke({"question" : user,"chunks":chunks},config={"configurable": {"thread_id": 3}})
+    #         print(response["messages"][-1].content)
 
 
 except Exception as e:
