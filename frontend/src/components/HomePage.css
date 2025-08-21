@@ -70,7 +70,7 @@ body{
   border: 1px solid #ddd;
   border-radius: 8px;
   max-height: 300px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   
 }
 
