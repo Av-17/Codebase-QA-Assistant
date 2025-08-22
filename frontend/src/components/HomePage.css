@@ -92,18 +92,27 @@ body{
 }
 
 .ai-bubble {
-  max-width: 75%;
+  max-width: 80%;
   word-wrap: break-word;     /* Break long words */
   white-space: pre-wrap;     /* Preserve line breaks but allow wrapping */
   overflow-wrap: break-word; /* Use break-word instead of anywhere for better support */
   box-sizing: border-box;    /* Ensure padding doesn't break max-width */
   display: inline-block;  
+  background: antiquewhite;
+  border: 2px solid wheat;
 }
 
 .ai-bubble pre {
-  white-space: pre-wrap;
-  word-wrap: break-word;      /* Legacy name */
-  overflow-wrap: break-word;    /* Modern name */
+  background: #f6f8fa;         /* light background like ChatGPT */
+  border-radius: 6px;          /* rounded corners */
+  padding: 12px;               /* spacing inside */
+  font-family: "Courier New", monospace;  /* monospace font */
+  font-size: 14px;             /* readable font size */
+  line-height: 1.5;            /* better spacing between lines */
+  white-space: pre-wrap;       /* keep formatting but allow wrapping */
+  word-wrap: break-word;       /* legacy word break */
+  overflow-wrap: break-word;   /* modern word break */
+  overflow-x: auto;      /* Modern name */
 }
 
 .spinner {
