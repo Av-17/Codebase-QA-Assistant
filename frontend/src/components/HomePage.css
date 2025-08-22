@@ -85,21 +85,31 @@ body{
 }
 
 .user-bubble {
-  background: #d8dadb;
-  color: black;
-  margin-left: auto;
+  .user-bubble {
+  background: #e3f2fd;       /* Light blue (friendly user feel) */
+  color: #0d47a1;            /* Dark blue text for contrast */
+  border: 1px solid #bbdefb; /* Subtle border */
+  border-radius: 12px 12px 0px 12px; /* Rounded edges, like chat */
+  padding: 12px 16px;        /* Inner spacing */
   margin-bottom: 10px;
+  margin-left: auto;         /* Align to right side */
+  max-width: 70%;            /* Limit width */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Soft shadow */
+  font-size: 15px;
+  line-height: 1.4;
+}
+
 }
 
 .ai-bubble {
-  max-width: 80%;
-  word-wrap: break-word;     /* Break long words */
-  white-space: pre-wrap;     /* Preserve line breaks but allow wrapping */
-  overflow-wrap: break-word; /* Use break-word instead of anywhere for better support */
-  box-sizing: border-box;    /* Ensure padding doesn't break max-width */
-  display: inline-block;  
-  background: antiquewhite;
-  border: 2px solid wheat;
+  background: #f6f8fa;       /* Light gray background */
+  border: 1px solid #e1e4e8; /* Subtle border */
+  border-radius: 10px;       /* Rounded corners */
+  padding: 12px 16px;        /* Spacing inside the bubble */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Soft shadow */
+  max-width: 80%;            /* Limit width like chat apps */
+  display: inline-block;     
+  box-sizing: border-box;
 }
 
 .ai-bubble pre {
