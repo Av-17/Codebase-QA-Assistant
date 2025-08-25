@@ -81,9 +81,9 @@ def callback(code: str):
         key="access_token",
         value=token,
         httponly=True,
-        secure=True,     # Must be True for HTTPS in production
+        secure=True,  # Must be True for HTTPS in production
         samesite="None",
-        max_age=3600*24*7  # 7 days expiry
+        max_age=3600*24*7  
     )
     return response
 
@@ -141,7 +141,7 @@ class AnswerQuestion(BaseModel):
 
 @app.post("/answer")
 async def getAnswer(req : AnswerQuestion):
-    chunks = repo_chunks_store.get(req.repo_url)  # repo_id could be repo_url or username
+    chunks = repo_chunks_store.get(req.repo_url)  
     if not chunks:
         return {"success" : False,"message": "❌  No repo data found","answer": None}
 
